@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace libreria.Models.dbModels;
 
-public partial class BookstoreManagerContext : DbContext
+public partial class BookstoreManagerContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int >
 {
-    public BookstoreManagerContext()
-    {
-    }
 
     public BookstoreManagerContext(DbContextOptions<BookstoreManagerContext> options)
         : base(options)
@@ -31,20 +30,14 @@ public partial class BookstoreManagerContext : DbContext
 
     public virtual DbSet<ReservationStatus> ReservationStatuses { get; set; }
 
-    public virtual DbSet<Role> Roles { get; set; }
-
     public virtual DbSet<State> States { get; set; }
 
     public virtual DbSet<Store> Stores { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost,1433;User=sa;Password=NuevaContra;Database=bookstoreManager;Trusted_connection=False;TrustServerCertificate=True");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Author>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__authors__3213E83FAE2D5E1F");
@@ -120,19 +113,11 @@ public partial class BookstoreManagerContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__reservati__store__44FF419A");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Reservations)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__reservati__user___440B1D61");
         });
 
         modelBuilder.Entity<ReservationStatus>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__reservat__3213E83F5119BF64");
-        });
-
-        modelBuilder.Entity<Role>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__roles__3213E83FD09DC142");
         });
 
         modelBuilder.Entity<State>(entity =>
@@ -153,15 +138,6 @@ public partial class BookstoreManagerContext : DbContext
             entity.HasOne(d => d.State).WithMany(p => p.Stores)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__stores__state_id__403A8C7D");
-        });
-
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__users__3213E83FE1C3C2EC");
-
-            entity.HasOne(d => d.Role).WithMany(p => p.Users)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__users__role_id__3D5E1FD2");
         });
 
         OnModelCreatingPartial(modelBuilder);
