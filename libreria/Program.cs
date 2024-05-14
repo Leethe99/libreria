@@ -14,6 +14,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options => opti
     .AddEntityFrameworkStores<BookstoreManagerContext>();
     //.AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 
 var app = builder.Build();
