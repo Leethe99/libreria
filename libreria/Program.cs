@@ -12,8 +12,8 @@ builder.Services.AddDbContext<BookstoreManagerContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<BookstoreManagerContext>();
-    //.AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<BookstoreManagerContext>()
+    .AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
