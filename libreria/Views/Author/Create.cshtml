@@ -1,9 +1,11 @@
-@model libreria.Models.dbModels.Author
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
 
 @{
-    ViewData["Title"] = "Create";
+    bool isAdmin = User.IsInRole("Admin");
 }
 
+<<<<<<< Updated upstream
 <h1>Crear Autor</h1>
 <hr />
 <div class="row">
@@ -35,3 +37,23 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+=======
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Button Example</title>
+</head>
+<body>
+    <h1>Welcome to the Admin Section</h1>
+
+    @if (isAdmin)
+    {
+        <button type="button" onclick="alert('Admin Button Clicked!')">Admin Only Button</button>
+    }
+    else
+    {
+        <p>You do not have admin privileges.</p>
+    }
+</body>
+</html>
+>>>>>>> Stashed changes

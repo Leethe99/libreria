@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using libreria.Models.dbModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace libreria.Views
 {
+    [Authorize(Roles = "admin")]
     public class BookController : Controller
     {
         private readonly BookstoreManagerContext _context;
@@ -18,6 +20,7 @@ namespace libreria.Views
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: Book
         public async Task<IActionResult> Index()
         {
@@ -25,6 +28,7 @@ namespace libreria.Views
             return View(await bookstoreManagerContext.ToListAsync());
         }
 
+        [AllowAnonymous]
         // GET: Book/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using libreria.Models.dbModels;
 using libreria.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace libreria.Controllers
 {
+    [Authorize]
     public class ReservationController : Controller
     {
         private readonly BookstoreManagerContext _context;

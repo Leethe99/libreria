@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using libreria.Models.dbModels;
 using libreria.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace libreria.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class StoreController : Controller
     {
         private readonly BookstoreManagerContext _context;
@@ -19,6 +22,7 @@ namespace libreria.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: Store
         public async Task<IActionResult> Index()
         {
@@ -26,6 +30,7 @@ namespace libreria.Controllers
             return View(await bookstoreManagerContext.ToListAsync());
         }
 
+        [AllowAnonymous]
         // GET: Store/Details/5
         public async Task<IActionResult> Details(int? id)
         {

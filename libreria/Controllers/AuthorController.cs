@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using libreria.Models.dbModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace libreria.Controllers
 {
+    
     public class AuthorController : Controller
     {
         private readonly BookstoreManagerContext _context;

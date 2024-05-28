@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using libreria.Models.dbModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace libreria.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class CountryController : Controller
     {
         private readonly BookstoreManagerContext _context;
