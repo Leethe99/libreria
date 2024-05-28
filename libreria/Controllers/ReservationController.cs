@@ -187,6 +187,52 @@ namespace libreria.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Approve(int id)
+        {
+            var reservation = await _context.Reservations.FindAsync(id);
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            reservation.StatusId = 1;
+
+            var inventory = await _context.Inventories
+                .FirstOrDefaultAsync(i => i.BookId == reservation.BookId && i.StoreId == reservation.StoreId);
+
+            if (inventory == null)
+            {
+                return NotFound("Inventory record not found");
+            }
+
+            if (inventory.Quantity < reservation.Quantity)
+            {
+                return BadRequest("Not enough stock in inventory");
+            }
+
+            inventory.Quantity -= reservation.Quantity;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Details), new { id = reservation.Id });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Deny(int id)
+        {
+            var reservation = await _context.Reservations.FindAsync(id);
+            if (reservation == null)
+            {
+                return NotFound();
+            }
+
+            reservation.StatusId = 2;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Details), new { id = reservation.Id });
+        }
+
         private bool ReservationExists(int id)
         {
           return (_context.Reservations?.Any(e => e.Id == id)).GetValueOrDefault();
