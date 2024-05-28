@@ -35,6 +35,8 @@ namespace libreria.Views
 
             var book = await _context.Books
                 .Include(b => b.Author)
+                .Include(b => b.Inventories) 
+                    .ThenInclude(i => i.Store)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (book == null)
             {
