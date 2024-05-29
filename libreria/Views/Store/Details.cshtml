@@ -4,44 +4,44 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalles de Tienda</h1>
 
 <div>
     <h4>Store</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+           Nombre:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Street)
+Calle:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Street)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Zipcode)
+           Codigo Postal:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Zipcode)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CityNavigation)
+      Ciudad:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CityNavigation.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CountryNavigation)
+          Pais:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CountryNavigation.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.State)
+        Estado:
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.State.Id)
@@ -49,6 +49,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-secondary">Editar</a> |
+    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
 </div>

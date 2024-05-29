@@ -50,6 +50,9 @@ namespace libreria.Views
         public IActionResult Create()
         {
             ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Id");
+            
+            
+            
             return View();
         }
 

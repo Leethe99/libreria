@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/libreria.styles.css" asp-append-version="true" />
 </head>
-<body style="background-color:chocolate">
+<body >
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light btn-secondary border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -29,9 +29,10 @@
                                   Reservaciones
                                 </button>
                                 <ul class="dropdown-menu">
-									<li><a class="nav-link text-dark" asp-area="" asp-controller="Reservationstatus" asp-action="Index">Estatus</a></li>
-                                    <li> <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Create">Crear</a></li>
-                            
+									<li><a class="nav-link text-dark" asp-area="" asp-controller="Reservationstatus" asp-action="Index">Estados</a></li>
+                             
+                                    <li> <a class="nav-link text-dark" asp-area="" asp-controller="Reservation" asp-action="Index">Lista</a></li>
+       
                                 </ul>
                             </div>
                         </li>
@@ -53,7 +54,7 @@
 
     <footer class="border-top footer text-muted" style="background-color:saddlebrown">
         <div class="container">
-            &copy; 2024 - BookMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - BookMS 
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
